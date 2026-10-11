@@ -1,21 +1,21 @@
+import "dotenv/config";
 import mongoose from "mongoose";
 import { app } from "./app.js";
-import dotenv from "dotenv";
 
-dotenv.config();
+const PORT = process.env.PORT || 8001;
+const DB_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/ecommerce";
 
-const PORT = process.env.PORT || 8000;
-const DB_URI = process.env.MONGO_URI;
+const server = app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
+
+console.log(`Connecting to MongoDB at ${DB_URI}...`);
 
 mongoose
   .connect(DB_URI)
   .then(() => {
-    console.log("Connected to MongoDB");
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
+    console.log(" Connected to MongoDB successfully");
   })
   .catch((err) => {
-    console.error("MongoDB connection error:", err);
-    process.exit(1);
+    console.error("❌ MongoDB connection error:", err.message);
   });

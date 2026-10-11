@@ -8,17 +8,20 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "javascript luxora"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",
-    "cros": "^1.1.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.7",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.17.1"
+    "mongoose": "^8.17.1",
+    "multer": "^2.4.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10",

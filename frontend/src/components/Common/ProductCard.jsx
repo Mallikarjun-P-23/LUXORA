@@ -2,24 +2,25 @@ import { ShoppingCart, Heart, Star, Edit, Trash2 } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../features/cartSlice'
 import { deleteProduct } from '../../features/productSlice'
-import { toast } from 'react-hot-toast'
+import { toast } from '../../utils/toast'
 
 export default function ProductCard({ product, isAdmin = false, onEdit }) {
   const dispatch = useDispatch()
   const { isAuthenticated } = useSelector(state => state.auth)
 
   const handleAddToCart = () => {
-    if (!isAuthenticated) {
-      toast.error('Please login to add items to cart')
-      return
+    const item = {
+      ...product,
+      id: product.id || product._id || String(Math.random()),
+      image: product.image || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600'
     }
-    dispatch(addToCart(product))
-    toast.success('Added to cart!')
+    dispatch(addToCart(item))
+    toast.success(`${product.name} added to bag!`)
   }
 
   const handleDelete = () => {
-    dispatch(deleteProduct(product.id))
-    toast.success('Product deleted')
+    dispatch(deleteProduct(product.id || product._id))
+    toast.success('Product removed')
   }
 
   return (
@@ -28,6 +29,10 @@ export default function ProductCard({ product, isAdmin = false, onEdit }) {
         <img 
           src={product.image}
           alt={product.name}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600';
+          }}
           className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
         />
         <div className="absolute top-2 right-2">

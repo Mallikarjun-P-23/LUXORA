@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Check, CreditCard, MapPin, Phone, Mail } from 'lucide-react'
 import { clearCart } from '../../features/cartSlice'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-hot-toast'
+import { toast } from '../../utils/toast'
 
 export default function CheckoutPage() {
   const cart = useSelector(state => state.cart.items)

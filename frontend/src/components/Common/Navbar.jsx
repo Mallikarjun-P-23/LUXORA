@@ -2,7 +2,7 @@ import { ShoppingCart, Search, LogOut } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../features/authSlice'
-import { toast } from 'react-hot-toast'
+import { toast } from '../../utils/toast'
 
 export default function Navbar() {
   const { isAuthenticated, userRole } = useSelector(state => state.auth)
@@ -21,8 +21,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-8">
-            <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-              LAUXORA
+            <Link to="/" className="text-2xl font-black tracking-widest bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-600 bg-clip-text text-transparent">
+              LUXORA
             </Link>
             {!isAuthenticated || userRole === 'customer' ? (
               <div className="hidden md:flex space-x-6">
