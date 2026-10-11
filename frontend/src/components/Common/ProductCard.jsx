@@ -48,10 +48,28 @@ export default function ProductCard({ product, isAdmin = false, onEdit }) {
       </div>
       
       <div className="p-4">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="font-semibold text-white text-sm truncate">{product.name}</h3>
-          <span className="text-blue-400 font-bold text-lg">${product.price}</span>
+        <div className="flex justify-between items-start mb-1">
+          <h3 className="font-semibold text-white text-sm truncate mr-2">{product.name}</h3>
+          <div className="text-right shrink-0">
+            <span className="text-blue-400 font-bold text-lg">${product.price}</span>
+            {product.originalPrice && product.originalPrice !== product.price && (
+              <span className="text-gray-500 line-through text-xs ml-1.5">${product.originalPrice}</span>
+            )}
+          </div>
         </div>
+        
+        {product.isEnginePriced && (
+          <div className="flex items-center gap-1.5 mb-2">
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              ⚡ Engine Calibrated
+            </span>
+            {product.discountBadge && (
+              <span className="text-[10px] text-gray-400">
+                {product.discountBadge}
+              </span>
+            )}
+          </div>
+        )}
         
         <p className="text-gray-400 text-xs mb-3 line-clamp-2">{product.description}</p>
         
